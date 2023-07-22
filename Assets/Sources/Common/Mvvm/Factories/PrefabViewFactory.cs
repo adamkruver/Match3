@@ -10,7 +10,7 @@ namespace Kruver.Mvvm.Factories
         public T Create<T>(string path = "") where T : BindableView =>
             Object.Instantiate(Resources.Load<T>(path + typeof(T).Name));
 
-        public BindableView Create(Type viewType, string path = "") =>
-            (BindableView)Object.Instantiate(Resources.Load(path + viewType.Name, viewType));
+        public BindableView Create(Type viewType, string path = "", string postfix = "") =>
+            (BindableView)Object.Instantiate(Resources.Load(path + viewType.Name + postfix, viewType));
     }
 }

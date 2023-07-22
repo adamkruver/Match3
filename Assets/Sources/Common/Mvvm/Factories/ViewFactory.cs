@@ -20,9 +20,9 @@ namespace Kruver.Mvvm.Factories
             return (TView)Create(typeof(TView), viewPath);
         }
 
-        public IBindableView Create(Type viewType, string viewPath = "")
+        public IBindableView Create(Type viewType, string viewPath = "", string postfix = "")
         {
-            BindableView view = _prefabViewFactory.Create(viewType, viewPath);
+            BindableView view = _prefabViewFactory.Create(viewType, viewPath, postfix);
             Construct(view);
 
             return view;

@@ -1,7 +1,7 @@
 {
     "name": "12_Application",
     "rootNamespace": "Match3.Application",
-    "references": ["GUID:aae50579cbfeecf48a43711f26d5bee8","GUID:9ae74a7f487c3154fba52d6803df0e7c","GUID:055a7a910c9a7f843ae6b322263b5772","GUID:e37e6909bde1b67429fc37cb79bd89e9"],
+    "references": ["GUID:aae50579cbfeecf48a43711f26d5bee8","GUID:9ae74a7f487c3154fba52d6803df0e7c","GUID:055a7a910c9a7f843ae6b322263b5772","GUID:e37e6909bde1b67429fc37cb79bd89e9","GUID:c7e60494927e8aa45850189dff57ed47","GUID:ab641f0910828d24bbc6326b275cc566"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
