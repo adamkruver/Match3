@@ -1,6 +1,7 @@
 ﻿namespace Match3.Domain.Types
 {
-    public class Banana : ICellType
+    public class Grape : ICellType
     {
+        
     }
 }

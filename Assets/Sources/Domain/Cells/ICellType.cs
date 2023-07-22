@@ -1,4 +1,4 @@
-﻿namespace Match3.Damain
+﻿namespace Match3.Domain
 {
     public interface ICellType
     {

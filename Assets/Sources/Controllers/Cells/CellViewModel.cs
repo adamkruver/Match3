@@ -6,7 +6,7 @@ using Kruver.Mvvm.ViewBindings.GameObject;
 using Kruver.Mvvm.ViewBindings.GameObjects;
 using Kruver.Mvvm.ViewBindings.Transform;
 using Kruver.Mvvm.ViewModels;
-using Match3.Damain;
+using Match3.Domain;
 using Sources.InfrastructureInterfaces.Services;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;

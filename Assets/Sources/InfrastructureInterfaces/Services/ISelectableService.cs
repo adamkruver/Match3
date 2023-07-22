@@ -1,4 +1,4 @@
-﻿using Match3.Damain;
+﻿using Match3.Domain;
 
 namespace Sources.InfrastructureInterfaces.Services
 {

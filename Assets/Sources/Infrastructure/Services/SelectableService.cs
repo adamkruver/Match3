@@ -1,5 +1,5 @@
 ﻿using System;
-using Match3.Damain;
+using Match3.Domain;
 using Sources.InfrastructureInterfaces.Services;
 using UnityEngine;
 

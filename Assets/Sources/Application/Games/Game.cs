@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Kruver.Mvvm.Factories;
 using Kruver.Mvvm.Views;
-using Match3.Damain;
-using Match3.Damain.Sources.Domain.Tables;
-using Match3.Damain.Types;
+using Match3.Domain;
+using Match3.Domain.Sources.Domain.Tables;
+using Match3.Domain.Types;
 using Match3.Presentation.Sources.Presentation.Factories;
 using Sources.Controllers.Cells;
 using Sources.Infrastructure.Services;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Match3.Application
 {
@@ -27,14 +28,17 @@ namespace Match3.Application
 
         public void Run()
         {
-            System.Random random = new System.Random();
+            Random random = new Random();
             List<Cell> cells = new List<Cell>();
             Table table = new Table(8, 8);
             ICellType[] cellTypes =
             {
                 new Orange(),
                 new Banana(),
-                new Apple()
+                new Apple(),
+                new Blueberry(),
+                new Grape(),
+                new Tomato()
             };
 
             for (int x = 0; x < table.Width; x++)

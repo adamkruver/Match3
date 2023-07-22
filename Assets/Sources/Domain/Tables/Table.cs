@@ -1,4 +1,4 @@
-﻿namespace Match3.Damain.Sources.Domain.Tables
+﻿namespace Match3.Domain.Sources.Domain.Tables
 {
     public class Table
     {

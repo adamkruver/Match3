@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Match3.Damain
+namespace Match3.Domain
 {
     public class Cell
     {
