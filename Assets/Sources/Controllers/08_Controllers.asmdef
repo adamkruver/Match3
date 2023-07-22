@@ -1,0 +1,14 @@
+{
+    "name": "08_Controllers",
+    "rootNamespace": "Match3.Controllers",
+    "references": ["GUID:055a7a910c9a7f843ae6b322263b5772","GUID:aae50579cbfeecf48a43711f26d5bee8"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
