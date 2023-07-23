@@ -19,8 +19,11 @@ namespace Sources.Controllers.Cells
         [PropertyBinding(typeof(ViewEnabledBindable))]
         private ObservableProperty<bool> _isEnabled;
         
+        [PropertyBinding(typeof(TransformSmoothPositionBindable))]
+        private ObservableProperty<Vector3> _smoothPosition;
+        
         [PropertyBinding(typeof(TransformPositionBindable))]
-        private ObservableProperty<Vector3> _position;
+        private ObservableProperty<Vector3> _startPosition;
 
         [PropertyBinding(typeof(GameObjectEnabledBindable))]
         private ObservableProperty<bool> _isSelected;
@@ -36,6 +39,7 @@ namespace Sources.Controllers.Cells
         protected override void OnEnable()
         {
             _isEnabled.Set(true);
+            _startPosition.Set(new Vector3(Model.Position.x, Model.Position.y + 8, 0));
             OnPositionChanging();
             
             AddListeners();
@@ -84,7 +88,7 @@ namespace Sources.Controllers.Cells
         private void OnPositionChanging()
         {
             int positionMultiplier = 1;
-            _position.Set(new Vector3(Model.Position.x * positionMultiplier, Model.Position.y * positionMultiplier, 0));
+            _smoothPosition.Set(new Vector3(Model.Position.x * positionMultiplier, Model.Position.y * positionMultiplier, 0));
         }
     }
 }

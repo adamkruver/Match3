@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Kruver.Mvvm.Factories;
+﻿using System.Collections.Generic;
 using Kruver.Mvvm.Views;
 using Match3.Domain;
 using Match3.Domain.Sources.Domain.Tables;
 using Match3.Domain.Types;
-using Match3.PresentationInterfaces.Factories;
+using Match3.PresentationInterfaces.Sources.PresentationInterfaces.Builders;
 using Sources.Controllers.Cells;
 using Sources.InfrastructureInterfaces.Factories;
 using Sources.InfrastructureInterfaces.Services;
@@ -18,9 +16,8 @@ namespace Sources.Infrastructure.Services
     {
         private readonly Table _table;
         private readonly ICellFactory _cellFactory;
-        private readonly IViewTypeFactory _viewTypeFactory;
+        private readonly ICellViewBuilder _cellViewBuilder;
         private readonly ISelectableService _selectableService;
-        private readonly ViewFactory _viewFactory;
         private readonly Random _random = new Random();
 
         private readonly ICellType[] _celltypes = new ICellType[]
@@ -36,15 +33,12 @@ namespace Sources.Infrastructure.Services
         public TableService(
             Table table,
             ICellFactory cellFactory,
-            IViewTypeFactory viewTypeFactory,
-            ViewFactory viewFactory
+            ICellViewBuilder cellViewBuilder
         )
         {
             _table = table;
             _cellFactory = cellFactory;
-            _viewTypeFactory = viewTypeFactory;
-            _viewFactory = viewFactory;
-
+            _cellViewBuilder = cellViewBuilder;
             _selectableService = new SelectableService(this, table);
         }
 
@@ -63,8 +57,7 @@ namespace Sources.Infrastructure.Services
                     Cell cell = _table[x, y];
 
                     CellViewModel cellViewModel = new CellViewModel(cell, _selectableService);
-                    Type type = _viewTypeFactory.Create(cell.CellType.GetType());
-                    IBindableView view = _viewFactory.Create(type, @"Views/Cells/");
+                    IBindableView view = _cellViewBuilder.Build(cell.CellType);
 
                     view.Bind(cellViewModel);
                 }

@@ -1,6 +1,9 @@
 ﻿using Kruver.Mvvm.Factories;
+using Kruver.Mvvm.Views;
+using Match3.Presentation.Builders;
 using Match3.Presentation.Sources.Presentation.Factories;
 using Sources.Infrastructure.Factories;
+using Sources.Infrastructure.ObjectPools;
 
 namespace Match3.Application.Builders
 {
@@ -14,8 +17,12 @@ namespace Match3.Application.Builders
             // Infrastructure Factories
             CellFactory cellFactory = new CellFactory();
 
+            ObjectPool<BindableView> _viewsPool = new ObjectPool<BindableView>();
+
+            CellViewBuilder cellViewBuilder = new CellViewBuilder(viewTypeFactory, _viewsPool, viewFactory);
+            
             // Infrastructure Factories
-            TableFactory tableFactory = new TableFactory(cellFactory, viewTypeFactory, viewFactory);
+            TableFactory tableFactory = new TableFactory(cellFactory, cellViewBuilder);
 
 
 

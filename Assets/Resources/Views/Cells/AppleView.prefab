@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1379999785986589526}
   - component: {fileID: 6505161383065346016}
   - component: {fileID: 9017979878094321991}
-  - component: {fileID: 4357312416445572005}
+  - component: {fileID: 2239111186805782931}
   m_Layer: 0
   m_Name: AppleView
   m_TagString: Untagged
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
---- !u!114 &4357312416445572005
+--- !u!114 &2239111186805782931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,10 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4719787226928497633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61075ac66bf2425fb81ac91666125d09, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
 --- !u!1 &7205992817278406575
 GameObject:
   m_ObjectHideFlags: 0

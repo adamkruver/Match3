@@ -29,6 +29,7 @@ namespace Sources.Infrastructure.Services
             {
                 _primary = cell;
                 _primary.Select();
+                
                 return;
             }
 
@@ -36,11 +37,13 @@ namespace Sources.Infrastructure.Services
             {
                 _primary.Unselect();
                 _primary = null;
+                
                 return;
             }
 
             _secondary = cell;
             _secondary.Select();
+            
             AdjacencyCheck();
         }
 

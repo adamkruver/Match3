@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6877511291547449087}
   - component: {fileID: -5017232107309480216}
   - component: {fileID: 8826091027483668600}
+  - component: {fileID: 5749041966958630671}
   m_Layer: 0
   m_Name: BananaView
   m_TagString: Untagged
@@ -197,6 +198,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8d58c752467472da11c5b521a97d17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5749041966958630671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108626564391763095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7422289014645018142

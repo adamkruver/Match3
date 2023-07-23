@@ -1,7 +1,7 @@
 {
     "name": "07_PresentationInterfaces",
     "rootNamespace": "Match3.PresentationInterfaces",
-    "references": [],
+    "references": ["GUID:aae50579cbfeecf48a43711f26d5bee8","GUID:055a7a910c9a7f843ae6b322263b5772"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
