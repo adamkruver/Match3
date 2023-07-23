@@ -1,6 +1,6 @@
 ﻿using Kruver.Mvvm.Factories;
 using Match3.Presentation.Sources.Presentation.Factories;
-using Sources.Infrastructure.Services;
+using Sources.Infrastructure.Factories;
 
 namespace Match3.Application.Builders
 {
@@ -8,12 +8,18 @@ namespace Match3.Application.Builders
     {
         public Game Build()
         {
-            SelectableService selectableService = new SelectableService();
             ViewTypeFactory viewTypeFactory = new ViewTypeFactory();
-
             ViewFactory viewFactory = new ViewFactory();
+            
+            // Infrastructure Factories
+            CellFactory cellFactory = new CellFactory();
 
-            return new Game(viewFactory, selectableService, viewTypeFactory);
+            // Infrastructure Factories
+            TableFactory tableFactory = new TableFactory(cellFactory, viewTypeFactory, viewFactory);
+
+
+
+            return new Game(tableFactory);
         }
     }
 }

@@ -8,7 +8,6 @@ using Kruver.Mvvm.ViewBindings.Transform;
 using Kruver.Mvvm.ViewModels;
 using Match3.Domain;
 using Sources.InfrastructureInterfaces.Services;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Sources.Controllers.Cells
@@ -37,7 +36,7 @@ namespace Sources.Controllers.Cells
         protected override void OnEnable()
         {
             _isEnabled.Set(true);
-            OnPositionChanged();
+            OnPositionChanging();
             
             AddListeners();
         }
@@ -50,8 +49,14 @@ namespace Sources.Controllers.Cells
 
         private void AddListeners()
         {
-            Model.PositionChanged += OnPositionChanged;
+            Model.PositionChanging += OnPositionChanging;
             Model.SelectionChanged += OnSelectionChanged;
+            Model.Destroying += OnDestroy;
+        }
+
+        private void OnDestroy()
+        {
+            Disable();
         }
 
         private void OnSelectionChanged()
@@ -61,15 +66,22 @@ namespace Sources.Controllers.Cells
 
         private void RemoveListeners()
         {
-            Model.PositionChanged -= OnPositionChanged;
+            Model.PositionChanging -= OnPositionChanging;
             Model.SelectionChanged -= OnSelectionChanged;
+            Model.Destroying += OnDestroy;
         }
 
         [MethodBinding(typeof(ClickBindable))]
         private void BindClick(Vector3 position) =>
             _selectableService.Select(Model);
 
-        private void OnPositionChanged()
+        [MethodBinding(typeof(ChangeTransformPositionBindable))]
+        private void BindChangePositionCallback(Vector3 position)
+        {
+            Model.NotifyPositionChanged();
+        }
+
+        private void OnPositionChanging()
         {
             int positionMultiplier = 1;
             _position.Set(new Vector3(Model.Position.x * positionMultiplier, Model.Position.y * positionMultiplier, 0));

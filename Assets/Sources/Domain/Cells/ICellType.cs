@@ -2,6 +2,8 @@
 {
     public interface ICellType
     {
-        
+        int Offset { get; }
+        int Mask { get; }
+        int Weight { get; }
     }
 }

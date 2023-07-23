@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Match3.PresentationInterfaces.Factories;
 
 namespace Match3.Presentation.Sources.Presentation.Factories
 {
-    public class ViewTypeFactory
+    public class ViewTypeFactory : IViewTypeFactory
     {
         private static readonly string _postfix = "View";
 

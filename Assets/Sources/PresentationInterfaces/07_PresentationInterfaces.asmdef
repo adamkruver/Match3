@@ -1,0 +1,14 @@
+{
+    "name": "07_PresentationInterfaces",
+    "rootNamespace": "Match3.PresentationInterfaces",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

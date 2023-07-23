@@ -1,7 +1,7 @@
 {
     "name": "11_Presentation",
     "rootNamespace": "Match3.Presentation",
-    "references": ["GUID:055a7a910c9a7f843ae6b322263b5772"],
+    "references": ["GUID:055a7a910c9a7f843ae6b322263b5772","GUID:298f245b92d5d6a4f831ec0ca93cf483"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

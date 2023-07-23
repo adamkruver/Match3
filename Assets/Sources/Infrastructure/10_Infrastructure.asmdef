@@ -1,4 +1,21 @@
 {
-	"name": "10_Infrastructure",
-	"references":[ "GUID:aae50579cbfeecf48a43711f26d5bee8", "GUID:ab641f0910828d24bbc6326b275cc566" ]
+    "name": "10_Infrastructure",
+    "rootNamespace": "",
+    "references": [
+        "GUID:aae50579cbfeecf48a43711f26d5bee8",
+        "GUID:ab641f0910828d24bbc6326b275cc566",
+        "GUID:9ae74a7f487c3154fba52d6803df0e7c",
+        "GUID:055a7a910c9a7f843ae6b322263b5772",
+        "GUID:298f245b92d5d6a4f831ec0ca93cf483",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
