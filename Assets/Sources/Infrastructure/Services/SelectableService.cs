@@ -63,15 +63,14 @@ namespace Sources.Infrastructure.Services
 
             await SwitchPosition();
 
-            while (_tableService.TryGetMatches(out Cell[] cells))
-            {
-                // TODO:  GET REWARD FROM Cells
-            }
-
             _secondary.Unselect();
             _primary.Unselect();
             _secondary = null;
             _primary = null;
+            
+            while (await _tableService.TryGetMatches())
+            {
+            }
         }
 
         private async UniTask SwitchPosition()
@@ -84,8 +83,8 @@ namespace Sources.Infrastructure.Services
                 _secondary
             });
 
-            _primary.PositionChanged += RemoveFromStack;
-            _secondary.PositionChanged += RemoveFromStack;
+            _primary.PositionChanged += RemoveFromList;
+            _secondary.PositionChanged += RemoveFromList;
 
             while (_cells.Count != 0)
             {
@@ -93,9 +92,9 @@ namespace Sources.Infrastructure.Services
             }
         }
 
-        private void RemoveFromStack(Cell cell)
+        private void RemoveFromList(Cell cell)
         {
-            cell.PositionChanged -= RemoveFromStack;
+            cell.PositionChanged -= RemoveFromList;
             _cells.Remove(cell);
         }
     }

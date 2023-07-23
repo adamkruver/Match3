@@ -15,10 +15,7 @@ namespace Kruver.Mvvm.ViewBindings.ParticleSystems
             mainModule.stopAction = ParticleSystemStopAction.Callback;
         }
 
-        public void OnParticleSystemStopped()
-        {
-            Debug.Log("Stop");
+        public void OnParticleSystemStopped() => 
             BindingCallback?.Invoke(false);
-        }
     }
 }

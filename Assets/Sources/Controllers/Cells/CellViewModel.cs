@@ -62,10 +62,10 @@ namespace Sources.Controllers.Cells
         {
             Model.PositionChanging += OnPositionChanging;
             Model.SelectionChanged += OnSelectionChanged;
-            Model.Destroying += OnDestroing;
+            Model.Destroying += OnDestroying;
         }
 
-        private void OnDestroing()
+        private void OnDestroying()
         {
             _scale.Set(Vector3.zero);
         }
@@ -79,7 +79,7 @@ namespace Sources.Controllers.Cells
         {
             Model.PositionChanging -= OnPositionChanging;
             Model.SelectionChanged -= OnSelectionChanged;
-            Model.Destroying += OnDestroing;
+            Model.Destroying += OnDestroying;
         }
 
         [MethodBinding(typeof(ClickBindable))]
@@ -101,6 +101,7 @@ namespace Sources.Controllers.Cells
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
         private void BindAfterParticlePlay(bool isEnabled)
         {
+            Model.NotifyDestroyed();
             Disable();
         }
 

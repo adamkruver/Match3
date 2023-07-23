@@ -26,7 +26,7 @@ namespace Kruver.Mvvm.ViewBindings.Transform
         {
             while (Vector3.Distance(transform.localScale, targetScale) > 0.01f)
             {
-                transform.localScale = Vector3.MoveTowards(transform.localScale, targetScale, Time.deltaTime * _speed);
+                transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * _speed);
                 yield return null;
             }
         } 

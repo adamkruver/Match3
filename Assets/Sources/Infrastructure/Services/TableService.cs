@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Kruver.Mvvm.Views;
 using Match3.Domain;
 using Match3.Domain.Sources.Domain.Tables;
@@ -20,14 +21,17 @@ namespace Sources.Infrastructure.Services
         private readonly ISelectableService _selectableService;
         private readonly Random _random = new Random();
 
+        private List<Cell> _cellsToDestroy;
+        private List<Cell> _newCells;
+
         private readonly ICellType[] _celltypes = new ICellType[]
         {
             new Banana(),
             new Apple(),
             new Grape(),
-            new Blueberry(),
-            new Tomato(),
-            new Orange()
+            //      new Blueberry(),
+            //       new Tomato(),
+            //       new Orange()
         };
 
         public TableService(
@@ -42,8 +46,10 @@ namespace Sources.Infrastructure.Services
             _selectableService = new SelectableService(this, table);
         }
 
-        public void Fill()
+        public List<Cell> Fill()
         {
+            List<Cell> newCells = new List<Cell>();
+
             for (int x = 0; x < _table.Width; x++)
             {
                 for (int y = _table.Height - 1; y >= 0; y--)
@@ -56,12 +62,16 @@ namespace Sources.Infrastructure.Services
                     _table[x, y] = _cellFactory.Create(cellType, x, y);
                     Cell cell = _table[x, y];
 
+                    newCells.Add(cell);
+
                     CellViewModel cellViewModel = new CellViewModel(cell, _selectableService);
                     IBindableView view = _cellViewBuilder.Build(cell.CellType);
 
                     view.Bind(cellViewModel);
                 }
             }
+
+            return newCells;
         }
 
         public void DropDown()
@@ -91,22 +101,52 @@ namespace Sources.Infrastructure.Services
             }
         }
 
-        public bool TryGetMatches(out Cell[] matchedCells)
+        public async UniTask<bool> TryGetMatches()
         {
-            matchedCells = null;
-
             int[,] cells = new int[_table.Width, _table.Height];
 
             GetVerticalMatches(cells);
             GetHorizontalMatches(cells);
-            GetReward(cells, out matchedCells);
-            DropDown();
-            Fill();
+            _cellsToDestroy = GetMatchedCells(cells);
 
-            return matchedCells.Length != 0;
+            if (_cellsToDestroy.Count == 0)
+                return false;
+
+            foreach (Cell cell in _cellsToDestroy)
+            {
+                cell.Destroyed += OnCellDestroyed;
+                _table.Destroy(cell.Position.x, cell.Position.y);
+            }
+
+            while (_cellsToDestroy.Count > 0)
+                await UniTask.NextFrame();
+
+            DropDown();
+            
+            _newCells = Fill();
+
+            foreach (Cell cell in _newCells)
+                cell.PositionChanged += OnPositionChanged;
+
+            while (_newCells.Count > 0)
+                await UniTask.NextFrame();
+
+            return true;
         }
 
-        private void GetReward(int[,] cells, out Cell[] matchedCells)
+        private void OnCellDestroyed(Cell cell)
+        {
+            cell.Destroyed -= OnCellDestroyed;
+            _cellsToDestroy.Remove(cell);
+        }
+
+        private void OnPositionChanged(Cell cell)
+        {
+            cell.PositionChanged -= OnCellDestroyed;
+            _newCells.Remove(cell);
+        }
+
+        private List<Cell> GetMatchedCells(int[,] cells)
         {
             List<Cell> destroyedCells = new List<Cell>();
 
@@ -117,12 +157,11 @@ namespace Sources.Infrastructure.Services
                     if (cells[x, y] != 0)
                     {
                         destroyedCells.Add(_table[x, y]);
-                        _table.Destroy(x, y);
                     }
                 }
             }
 
-            matchedCells = destroyedCells.ToArray();
+            return destroyedCells;
         }
 
         private void GetHorizontalMatches(int[,] cells)

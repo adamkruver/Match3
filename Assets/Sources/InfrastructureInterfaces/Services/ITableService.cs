@@ -1,11 +1,13 @@
-﻿using Match3.Domain;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Match3.Domain;
 
 namespace Sources.InfrastructureInterfaces.Services
 {
     public interface ITableService
     {
-        void Fill();
+        List<Cell> Fill();
         void DropDown();
-        bool TryGetMatches(out Cell[] matchedCells);
+        UniTask<bool> TryGetMatches();
     }
 }

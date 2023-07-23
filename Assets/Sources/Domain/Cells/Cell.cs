@@ -17,16 +17,18 @@ namespace Match3.Domain
         public event Action<Cell> PositionChanged;
         public event Action SelectionChanged;
         public event Action Destroying;
+        public event Action<Cell> Destroyed;
 
         public ICellType CellType { get; }
         public Vector2Int Position { get; private set; }
         public bool IsSelected { get; private set; }
 
-        public void NotifyPositionChanged()
-        {
+        public void NotifyPositionChanged() => 
             PositionChanged?.Invoke(this);
-        }
-        
+
+        public void NotifyDestroyed() => 
+            Destroyed?.Invoke(this);
+
         public void SetPosition(Vector2Int position)
         {
             Position = position;
@@ -51,9 +53,7 @@ namespace Match3.Domain
             SelectionChanged?.Invoke();
         }
         
-        public void Destroy()
-        {
+        public void Destroy() => 
             Destroying?.Invoke();
-        }
     }
 }
