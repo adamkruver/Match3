@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6981434768102120587}
   - component: {fileID: 6402791111440748942}
   - component: {fileID: 8644990724177009310}
+  - component: {fileID: 247678388978203057}
+  - component: {fileID: 6439117579754453900}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -83,6 +85,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &247678388978203057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931586649749469551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3600035711574682ae1d32a886ca2030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+--- !u!114 &6439117579754453900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931586649749469551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41a6d2475a14d00bf260cd6eaa0ccb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _changeTransformScaleBindable: {fileID: 247678388978203057}
 --- !u!1 &5147545059525235550
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,18 +480,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -502,10 +518,6 @@ PrefabInstance:
     - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4244186553991308, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
