@@ -29,9 +29,9 @@ namespace Sources.Infrastructure.Services
             new Banana(),
             new Apple(),
             new Grape(),
-            //      new Blueberry(),
-            //       new Tomato(),
-            //       new Orange()
+            new Blueberry(),
+            new Tomato(),
+            new Orange()
         };
 
         public TableService(
@@ -122,7 +122,7 @@ namespace Sources.Infrastructure.Services
                 await UniTask.NextFrame();
 
             DropDown();
-            
+
             _newCells = Fill();
 
             foreach (Cell cell in _newCells)

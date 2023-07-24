@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Match3.Domain;
 using Match3.Domain.Sources.Domain.Tables;
@@ -17,14 +16,35 @@ namespace Sources.Infrastructure.Services
         private Cell _secondary;
         private List<Cell> _cells;
 
+        private bool _isEnabled = true;
+
         public SelectableService(ITableService tableService, Table table)
         {
             _tableService = tableService;
             _table = table;
         }
 
+        public void Enable()
+        {
+            if (_isEnabled)
+                return;
+
+            _isEnabled = true;
+        }
+
+        public void Disable()
+        {
+            if (_isEnabled == false)
+                return;
+
+            _isEnabled = false;
+        }
+
         public void Select(Cell cell)
         {
+            if (_isEnabled == false)
+                return;
+            
             if (_primary == null)
             {
                 _primary = cell;
@@ -43,8 +63,8 @@ namespace Sources.Infrastructure.Services
 
             _secondary = cell;
             _secondary.Select();
-            
             AdjacencyCheck();
+            
         }
 
         private async UniTask AdjacencyCheck()
@@ -61,6 +81,8 @@ namespace Sources.Infrastructure.Services
                 return;
             }
 
+            Disable();
+            
             await SwitchPosition();
 
             _secondary.Unselect();
@@ -71,6 +93,8 @@ namespace Sources.Infrastructure.Services
             while (await _tableService.TryGetMatches())
             {
             }
+            
+            Enable();
         }
 
         private async UniTask SwitchPosition()
