@@ -31,7 +31,8 @@ namespace Sources.Infrastructure.Services
             new Grape(),
             new Blueberry(),
             new Tomato(),
-            new Orange()
+            new Orange(),
+            new Garlic()
         };
 
         public TableService(
@@ -107,11 +108,21 @@ namespace Sources.Infrastructure.Services
 
             GetVerticalMatches(cells);
             GetHorizontalMatches(cells);
+            
             _cellsToDestroy = GetMatchedCells(cells);
 
             if (_cellsToDestroy.Count == 0)
                 return false;
 
+            await DestroyCellsAsync();
+            DropDown();
+            await FillAsync();
+
+            return true;
+        }
+
+        private async UniTask DestroyCellsAsync()
+        {
             foreach (Cell cell in _cellsToDestroy)
             {
                 cell.Destroyed += OnCellDestroyed;
@@ -120,9 +131,10 @@ namespace Sources.Infrastructure.Services
 
             while (_cellsToDestroy.Count > 0)
                 await UniTask.NextFrame();
+        }
 
-            DropDown();
-
+        private async UniTask FillAsync()
+        {
             _newCells = Fill();
 
             foreach (Cell cell in _newCells)
@@ -130,8 +142,6 @@ namespace Sources.Infrastructure.Services
 
             while (_newCells.Count > 0)
                 await UniTask.NextFrame();
-
-            return true;
         }
 
         private void OnCellDestroyed(Cell cell)

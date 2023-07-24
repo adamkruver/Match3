@@ -1,4 +1,5 @@
-﻿using Kruver.Mvvm.Methods.Attributes;
+﻿using Cysharp.Threading.Tasks;
+using Kruver.Mvvm.Methods.Attributes;
 using Kruver.Mvvm.Properties;
 using Kruver.Mvvm.Properties.Attributes;
 using Kruver.Mvvm.ViewBindings.Click;
@@ -70,9 +71,17 @@ namespace Sources.Controllers.Cells
 
         private void OnDestroying()
         {
-            _scale.Set(new Vector3(0.2f, 0.2f, 0.2f));
+            Destroy();
         }
 
+        private async UniTask Destroy()
+        {
+            _isExplose.Set(true);
+
+            await UniTask.WaitForSeconds(.8f);
+            _scale.Set(Vector3.one * 0f);
+            
+        }
         private void OnSelectionChanged()
         {
             _isSelected.Set(Model.IsSelected);
@@ -98,15 +107,14 @@ namespace Sources.Controllers.Cells
         [MethodBinding(typeof(ChangeTransformScaleBindable))]
         private void BindChangeScaleCallback(Vector3 scale)
         {
-            _isExplose.Set(true);
             _isCellVisible.Set(false);
+            Model.NotifyDestroyed();
+            Disable();
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
         private void BindAfterParticlePlay(bool isEnabled)
         {
-            Model.NotifyDestroyed();
-            Disable();
         }
 
         private void OnPositionChanging()
