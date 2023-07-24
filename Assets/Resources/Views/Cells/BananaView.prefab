@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changeTransformPositionBindable: {fileID: -5017232107309480216}
-  _moveSpeed: 20
 --- !u!114 &-5017232107309480216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61075ac66bf2425fb81ac91666125d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
+  _moveSpeed: 60
 --- !u!114 &8826091027483668600
 MonoBehaviour:
   m_ObjectHideFlags: 0

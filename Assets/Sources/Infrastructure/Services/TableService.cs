@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Kruver.Mvvm.Views;
 using Match3.Domain;
@@ -60,19 +61,24 @@ namespace Sources.Infrastructure.Services
 
                     ICellType cellType = _celltypes[_random.Next(_celltypes.Length)];
 
-                    _table[x, y] = _cellFactory.Create(cellType, x, y);
-                    Cell cell = _table[x, y];
-
-                    newCells.Add(cell);
-
-                    CellViewModel cellViewModel = new CellViewModel(cell, _selectableService);
-                    IBindableView view = _cellViewBuilder.Build(cell.CellType);
-
-                    view.Bind(cellViewModel);
+                    newCells.Add(CreateCell(cellType, x, y));
                 }
             }
 
             return newCells;
+        }
+
+        private Cell CreateCell(ICellType cellType, int x, int y)
+        {
+            _table[x, y] = _cellFactory.Create(cellType, x, y);
+            Cell cell = _table[x, y];
+
+            CellViewModel cellViewModel = new CellViewModel(cell, _selectableService);
+            IBindableView view = _cellViewBuilder.Build(cell.CellType);
+
+            view.Bind(cellViewModel);
+
+            return cell;
         }
 
         public void DropDown()
@@ -108,25 +114,44 @@ namespace Sources.Infrastructure.Services
 
             GetVerticalMatches(cells);
             GetHorizontalMatches(cells);
-            
+
             _cellsToDestroy = GetMatchedCells(cells);
 
             if (_cellsToDestroy.Count == 0)
                 return false;
 
-            await DestroyCellsAsync();
+            await DestroyCellsAsync(cells);
             DropDown();
             await FillAsync();
 
             return true;
         }
 
-        private async UniTask DestroyCellsAsync()
+        private async UniTask DestroyCellsAsync(int[,] cells)
         {
-            foreach (Cell cell in _cellsToDestroy)
+            for (int i = _cellsToDestroy.Count - 1; i >= 0; i--)
             {
-                cell.Destroyed += OnCellDestroyed;
-                _table.Destroy(cell.Position.x, cell.Position.y);
+                Cell cell = _cellsToDestroy[i];
+
+                int x = cell.Position.x;
+                int y = cell.Position.y;
+                ICellType cellType = cell.CellType;
+
+                int width = (cells[x, y] & cellType.Mask) >> cellType.Offset;
+
+                string input = Console.ReadLine()!;
+
+                if (width == 1)
+                {
+                    _table.Destroy(x, y);
+                    cell.Destroyed += OnCellDestroyed;
+
+                    continue;
+                }
+
+                _cellsToDestroy.Remove(cell);
+                cell.NotifyDestroyed();
+                CreateCell(new Multi(), x, y);
             }
 
             while (_cellsToDestroy.Count > 0)
@@ -191,14 +216,14 @@ namespace Sources.Infrastructure.Services
                         continue;
                     }
 
-                    CalculateHorizontalWeight(cells, currentCellType, y, startX, endX);
+                    CalculateHorizontalWeight(cells, y, startX, endX);
 
                     startX = x;
                     endX = x;
                     currentCellType = _table[x, y].CellType;
                 }
 
-                CalculateHorizontalWeight(cells, currentCellType, y, startX, endX);
+                CalculateHorizontalWeight(cells, y, startX, endX);
             }
         }
 
@@ -219,20 +244,19 @@ namespace Sources.Infrastructure.Services
                         continue;
                     }
 
-                    CalculateVerticalWeight(cells, currentCellType, x, startY, endY);
+                    CalculateVerticalWeight(cells, x, startY, endY);
 
                     startY = y;
                     endY = y;
                     currentCellType = _table[x, y].CellType;
                 }
 
-                CalculateVerticalWeight(cells, currentCellType, x, startY, endY);
+                CalculateVerticalWeight(cells, x, startY, endY);
             }
         }
 
         private void CalculateHorizontalWeight(
             int[,] cells,
-            ICellType cellType,
             int y,
             int startX,
             int endX
@@ -243,13 +267,15 @@ namespace Sources.Infrastructure.Services
             if (matches >= 3)
             {
                 for (int i = startX; i <= endX; i++)
-                    cells[i, y] += cellType.Weight;
+                    cells[i, y] += _table[i, y].CellType.Weight;
             }
 
             if (matches >= 4)
             {
                 for (int i = 0; i < startX; i++)
                 {
+                    ICellType cellType = _table[i, y].CellType;
+
                     int currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
@@ -258,6 +284,8 @@ namespace Sources.Infrastructure.Services
 
                 for (int i = endX + 1; i < _table.Width; i++)
                 {
+                    ICellType cellType = _table[i, y].CellType;
+
                     int currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
@@ -268,13 +296,12 @@ namespace Sources.Infrastructure.Services
             if (matches >= 5)
             {
                 int index = Mathf.CeilToInt((endX - startX) / 2f) + startX;
-                cells[index, y] += cellType.Weight;
+                cells[index, y] += _table[index, y].CellType.Weight;
             }
         }
 
         private void CalculateVerticalWeight(
             int[,] cells,
-            ICellType cellType,
             int x,
             int startY,
             int endY)
@@ -284,13 +311,15 @@ namespace Sources.Infrastructure.Services
             if (matches >= 3)
             {
                 for (int i = startY; i <= endY; i++)
-                    cells[x, i] += cellType.Weight;
+                    cells[x, i] += _table[x, i].CellType.Weight;
             }
 
             if (matches >= 4)
             {
                 for (int i = 0; i < startY; i++)
                 {
+                    ICellType cellType = _table[x, i].CellType;
+
                     int currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
@@ -299,6 +328,8 @@ namespace Sources.Infrastructure.Services
 
                 for (int i = endY + 1; i < _table.Height; i++)
                 {
+                    ICellType cellType = _table[x, i].CellType;
+
                     int currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
@@ -309,7 +340,7 @@ namespace Sources.Infrastructure.Services
             if (matches >= 5)
             {
                 int index = Mathf.CeilToInt((endY - startY) / 2f) + startY;
-                cells[x, index] += cellType.Weight;
+                cells[x, index] += _table[x, index].CellType.Weight;
             }
         }
     }

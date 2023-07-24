@@ -40,7 +40,7 @@ public class LightingTools_Offer : MonoBehaviour {
 		for(int a = 0;a<textures.Length;a++)
 			textures[a] =  new Texture2D(4, 4, TextureFormat.DXT1, false);
 
-		Reload ();
+	//	Reload ();
 
 	}
 

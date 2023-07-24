@@ -67,6 +67,8 @@ namespace Sources.Controllers.Cells
             Model.PositionChanging += OnPositionChanging;
             Model.SelectionChanged += OnSelectionChanged;
             Model.Destroying += OnDestroying;
+            Model.Destroyed += OnDestroyed;
+
         }
 
         private void OnDestroying()
@@ -91,7 +93,13 @@ namespace Sources.Controllers.Cells
         {
             Model.PositionChanging -= OnPositionChanging;
             Model.SelectionChanged -= OnSelectionChanged;
-            Model.Destroying += OnDestroying;
+            Model.Destroying -= OnDestroying;
+            Model.Destroyed -= OnDestroyed;
+        }
+
+        private void OnDestroyed(Cell cell)
+        {
+            Disable();
         }
 
         [MethodBinding(typeof(ClickBindable))]
@@ -109,7 +117,6 @@ namespace Sources.Controllers.Cells
         {
             _isCellVisible.Set(false);
             Model.NotifyDestroyed();
-            Disable();
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
