@@ -96,8 +96,9 @@ GameObject:
   - component: {fileID: 1648971086935078198}
   - component: {fileID: 2670666404445938299}
   - component: {fileID: 6229092644609949762}
+  - component: {fileID: 7716113071169724817}
   m_Layer: 0
-  m_Name: gem_04
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +195,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3600035711574682ae1d32a886ca2030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 14
+  _speed: 18
+--- !u!114 &7716113071169724817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635803708068177912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93d22d5524848169e44d7f2923e2106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObject: {fileID: 1635803708068177912}
+  _enabledOnStart: 1
 --- !u!1 &2931586649749469551
 GameObject:
   m_ObjectHideFlags: 0

@@ -310,8 +310,9 @@ GameObject:
   - component: {fileID: 9053062297092249102}
   - component: {fileID: 7673579981670287918}
   - component: {fileID: 9093227005740470293}
+  - component: {fileID: 2175317762345003188}
   m_Layer: 0
-  m_Name: gem_02
+  m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3600035711574682ae1d32a886ca2030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 14
+  _speed: 18
 --- !u!114 &9093227005740470293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +410,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changeTransformScaleBindable: {fileID: 7673579981670287918}
+--- !u!114 &2175317762345003188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9076978219581132214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93d22d5524848169e44d7f2923e2106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObject: {fileID: 9076978219581132214}
+  _enabledOnStart: 1
 --- !u!1001 &1102676075020634219
 PrefabInstance:
   m_ObjectHideFlags: 0

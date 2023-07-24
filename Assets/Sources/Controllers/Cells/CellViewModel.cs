@@ -34,6 +34,9 @@ namespace Sources.Controllers.Cells
 
         [PropertyBinding(typeof(GameObjectEnabledBindable), "Explosion")]
         private ObservableProperty<bool> _isExplose;
+        
+        [PropertyBinding(typeof(GameObjectEnabledBindable), "Cell")]
+        private ObservableProperty<bool> _isCellVisible;
 
         public CellViewModel(
             Cell model,
@@ -67,7 +70,7 @@ namespace Sources.Controllers.Cells
 
         private void OnDestroying()
         {
-            _scale.Set(Vector3.zero);
+            _scale.Set(new Vector3(0.2f, 0.2f, 0.2f));
         }
 
         private void OnSelectionChanged()
@@ -96,6 +99,7 @@ namespace Sources.Controllers.Cells
         private void BindChangeScaleCallback(Vector3 scale)
         {
             _isExplose.Set(true);
+            _isCellVisible.Set(false);
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
