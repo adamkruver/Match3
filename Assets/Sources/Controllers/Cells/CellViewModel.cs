@@ -79,10 +79,10 @@ namespace Sources.Controllers.Cells
         private async UniTask Destroy()
         {
             _isExplose.Set(true);
-
-            await UniTask.WaitForSeconds(.8f);
-            _scale.Set(Vector3.one * 0f);
-            
+            await UniTask.WaitForSeconds(.7f);
+            Model.NotifyDestroyed();
+            await UniTask.WaitForSeconds(.1f);
+            _scale.Set(Vector3.zero);
         }
         private void OnSelectionChanged()
         {
@@ -116,7 +116,6 @@ namespace Sources.Controllers.Cells
         private void BindChangeScaleCallback(Vector3 scale)
         {
             _isCellVisible.Set(false);
-            Model.NotifyDestroyed();
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
