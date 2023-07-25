@@ -695,6 +695,10 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 198221555977248224, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 198331395215014254, guid: 7296a2d87cde6294798c594cb5d725f6, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime0
       value: 0

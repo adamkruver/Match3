@@ -35,7 +35,7 @@ namespace Sources.Controllers.Cells
 
         [PropertyBinding(typeof(GameObjectEnabledBindable), "Explosion")]
         private ObservableProperty<bool> _isExplose;
-        
+
         [PropertyBinding(typeof(GameObjectEnabledBindable), "Cell")]
         private ObservableProperty<bool> _isCellVisible;
 
@@ -68,7 +68,6 @@ namespace Sources.Controllers.Cells
             Model.SelectionChanged += OnSelectionChanged;
             Model.Destroying += OnDestroying;
             Model.Destroyed += OnDestroyed;
-
         }
 
         private void OnDestroying()
@@ -79,11 +78,12 @@ namespace Sources.Controllers.Cells
         private async UniTask Destroy()
         {
             _isExplose.Set(true);
-            await UniTask.WaitForSeconds(.7f);
-            Model.NotifyDestroyed();
-            await UniTask.WaitForSeconds(.1f);
+            await UniTask.WaitForSeconds(.6f);
             _scale.Set(Vector3.zero);
+            await UniTask.WaitForSeconds(.1f);
+            Model.NotifyDestroyed();
         }
+
         private void OnSelectionChanged()
         {
             _isSelected.Set(Model.IsSelected);
@@ -99,6 +99,12 @@ namespace Sources.Controllers.Cells
 
         private void OnDestroyed(Cell cell)
         {
+            DisableAsync();
+        }
+
+        private async UniTask DisableAsync()
+        {
+            await UniTask.WaitForSeconds(.1f);
             Disable();
         }
 
