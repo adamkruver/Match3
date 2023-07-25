@@ -236,7 +236,7 @@ namespace Sources.Infrastructure.Services
 
                 for (int y = 1; y < _table.Height; y++)
                 {
-                    if (_table[x, y].CellType == currentCellType)
+                    if (_table[x, y].CellType.GetType() == currentCellType.GetType())
                     {
                         endY = y;
                         continue;
