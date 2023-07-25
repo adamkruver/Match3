@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Codice.Client.Commands.Xlinks;
 using Cysharp.Threading.Tasks;
 using Kruver.Mvvm.Views;
 using Match3.Domain;
@@ -139,7 +139,8 @@ namespace Sources.Infrastructure.Services
 
                 long width = (cells[x, y] & cellType.Mask) >> cellType.Offset;
                 Debug.Log($"{cellType.GetType().Name} : {width}");
-                if (width == 1)
+
+                if (width <= 1)
                 {
                     _table.Destroy(x, y);
                     cell.Destroyed += OnCellDestroyed;
@@ -201,27 +202,13 @@ namespace Sources.Infrastructure.Services
         {
             for (int y = 0; y < _table.Height; y++)
             {
-                int startX = 0;
-                int endX = 0;
-
-                ICellType currentCellType = _table[0, y].CellType;
-
-                for (int x = 1; x < _table.Width; x++)
+                for (int x = 0; x < _table.Width; x++)
                 {
-                    if (_table[x, y].CellType.GetType() == currentCellType.GetType())
-                    {
-                        endX = x;
-                        continue;
-                    }
+                    (int repeats, int nextX) = GetHorizontalRepeats(x, y);
 
-                    CalculateHorizontalWeight(cells, y, startX, endX);
-
-                    startX = x;
-                    endX = x;
-                    currentCellType = _table[x, y].CellType;
+                    CalculateHorizontalWeight(cells, y, x, x + repeats - 1);
+                    x = nextX;
                 }
-
-                CalculateHorizontalWeight(cells, y, startX, endX);
             }
         }
 
@@ -229,28 +216,110 @@ namespace Sources.Infrastructure.Services
         {
             for (int x = 0; x < _table.Width; x++)
             {
-                int startY = 0;
-                int endY = 0;
-
-                ICellType currentCellType = _table[x, 0].CellType;
-
-                for (int y = 1; y < _table.Height; y++)
+                for (int y = 0; y < _table.Height; y++)
                 {
-                    if (_table[x, y].CellType.GetType() == currentCellType.GetType())
-                    {
-                        endY = y;
-                        continue;
-                    }
+                    (int repeats, int nextY) = GetVerticalRepeats(x, y);
 
-                    CalculateVerticalWeight(cells, x, startY, endY);
+                    CalculateVerticalWeight(cells, x, y, y + repeats - 1);
+                    y = nextY;
+                }
+            }
+        }
 
-                    startY = y;
-                    endY = y;
-                    currentCellType = _table[x, y].CellType;
+        private (int repeats, int nextY) GetVerticalRepeats(int x, int y)
+        {
+            int nextY = y;
+            int repeats = 1;
+
+            ICellType currentCellType = GetNextVerticalCellType(x, y);
+
+            if (currentCellType == null)
+            {
+                return (1, _table.Height);
+            }
+
+            for (int i = y + 1; i < _table.Height; i++)
+            {
+                ICellType cellType = _table[x, i].CellType;
+
+                if (cellType is Multi)
+                {
+                    repeats++;
+                    continue;
                 }
 
-                CalculateVerticalWeight(cells, x, startY, endY);
+                if (cellType.GetType() == currentCellType.GetType())
+                {
+                    repeats++;
+                    nextY = i;
+                    continue;
+                }
+
+                break;
             }
+
+            return (repeats, nextY);
+        }
+
+        private (int repeats, int nextX) GetHorizontalRepeats(int x, int y)
+        {
+            int nextX = x;
+            int repeats = 1;
+
+            ICellType currentCellType = GetNextHorizontalCellType(x, y);
+
+            if (currentCellType == null)
+            {
+                return (1, _table.Width);
+            }
+
+            for (int i = x + 1; i < _table.Width; i++)
+            {
+                ICellType cellType = _table[i, y].CellType;
+
+                if (cellType is Multi)
+                {
+                    repeats++;
+                    continue;
+                }
+
+                if (cellType.GetType() == currentCellType.GetType())
+                {
+                    repeats++;
+                    nextX = i;
+                    continue;
+                }
+
+                break;
+            }
+
+            return (repeats, nextX);
+        }
+
+        private ICellType GetNextVerticalCellType(int x, int y)
+        {
+            for (int i = y; i < _table.Height; i++)
+            {
+                ICellType cellType = _table[x, i].CellType;
+
+                if (cellType is not Multi)
+                    return cellType;
+            }
+
+            return null;
+        }
+
+        private ICellType GetNextHorizontalCellType(int x, int y)
+        {
+            for (int i = x; i < _table.Width; i++)
+            {
+                ICellType cellType = _table[i, y].CellType;
+
+                if (cellType is not Multi)
+                    return cellType;
+            }
+
+            return null;
         }
 
         private void CalculateHorizontalWeight(
@@ -261,6 +330,11 @@ namespace Sources.Infrastructure.Services
         )
         {
             int matches = endX - startX + 1;
+
+            ICellType currentCellType = GetNextHorizontalCellType(startX, y);
+
+            if (currentCellType == null)
+                return;
 
             if (matches >= 3)
             {
@@ -294,7 +368,7 @@ namespace Sources.Infrastructure.Services
             if (matches >= 5)
             {
                 int index = Mathf.CeilToInt((endX - startX) / 2f) + startX;
-                cells[index, y] += _table[index, y].CellType.Weight;
+                cells[index, y] += currentCellType.Weight;
             }
         }
 
@@ -305,6 +379,11 @@ namespace Sources.Infrastructure.Services
             int endY)
         {
             int matches = endY - startY + 1;
+
+            ICellType currentCellType = GetNextVerticalCellType(x, startY);
+
+            if (currentCellType == null)
+                return;
 
             if (matches >= 3)
             {
@@ -338,7 +417,7 @@ namespace Sources.Infrastructure.Services
             if (matches >= 5)
             {
                 int index = Mathf.CeilToInt((endY - startY) / 2f) + startY;
-                cells[x, index] += _table[x, index].CellType.Weight;
+                cells[x, index] += currentCellType.Weight;
             }
         }
     }

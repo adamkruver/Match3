@@ -121,7 +121,7 @@ namespace Sources.Controllers.Cells
         [MethodBinding(typeof(ChangeTransformScaleBindable))]
         private void BindChangeScaleCallback(Vector3 scale)
         {
-            _isCellVisible.Set(false);
+//            _isCellVisible.Set(false);
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]
