@@ -110,7 +110,7 @@ namespace Sources.Infrastructure.Services
 
         public async UniTask<bool> TryGetMatches()
         {
-            int[,] cells = new int[_table.Width, _table.Height];
+            long[,] cells = new long[_table.Width, _table.Height];
 
             GetVerticalMatches(cells);
             GetHorizontalMatches(cells);
@@ -127,7 +127,7 @@ namespace Sources.Infrastructure.Services
             return true;
         }
 
-        private async UniTask DestroyCellsAsync(int[,] cells)
+        private async UniTask DestroyCellsAsync(long[,] cells)
         {
             for (int i = _cellsToDestroy.Count - 1; i >= 0; i--)
             {
@@ -137,10 +137,8 @@ namespace Sources.Infrastructure.Services
                 int y = cell.Position.y;
                 ICellType cellType = cell.CellType;
 
-                int width = (cells[x, y] & cellType.Mask) >> cellType.Offset;
-
-                string input = Console.ReadLine()!;
-
+                long width = (cells[x, y] & cellType.Mask) >> cellType.Offset;
+                Debug.Log($"{cellType.GetType().Name} : {width}");
                 if (width == 1)
                 {
                     _table.Destroy(x, y);
@@ -181,7 +179,7 @@ namespace Sources.Infrastructure.Services
             _newCells.Remove(cell);
         }
 
-        private List<Cell> GetMatchedCells(int[,] cells)
+        private List<Cell> GetMatchedCells(long[,] cells)
         {
             List<Cell> destroyedCells = new List<Cell>();
 
@@ -199,7 +197,7 @@ namespace Sources.Infrastructure.Services
             return destroyedCells;
         }
 
-        private void GetHorizontalMatches(int[,] cells)
+        private void GetHorizontalMatches(long[,] cells)
         {
             for (int y = 0; y < _table.Height; y++)
             {
@@ -210,7 +208,7 @@ namespace Sources.Infrastructure.Services
 
                 for (int x = 1; x < _table.Width; x++)
                 {
-                    if (_table[x, y].CellType == currentCellType)
+                    if (_table[x, y].CellType.GetType() == currentCellType.GetType())
                     {
                         endX = x;
                         continue;
@@ -227,7 +225,7 @@ namespace Sources.Infrastructure.Services
             }
         }
 
-        private void GetVerticalMatches(int[,] cells)
+        private void GetVerticalMatches(long[,] cells)
         {
             for (int x = 0; x < _table.Width; x++)
             {
@@ -256,7 +254,7 @@ namespace Sources.Infrastructure.Services
         }
 
         private void CalculateHorizontalWeight(
-            int[,] cells,
+            long[,] cells,
             int y,
             int startX,
             int endX
@@ -276,7 +274,7 @@ namespace Sources.Infrastructure.Services
                 {
                     ICellType cellType = _table[i, y].CellType;
 
-                    int currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
+                    long currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
                         cells[i, y] = cellType.Weight;
@@ -286,7 +284,7 @@ namespace Sources.Infrastructure.Services
                 {
                     ICellType cellType = _table[i, y].CellType;
 
-                    int currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
+                    long currentWeight = (cells[i, y] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
                         cells[i, y] = cellType.Weight;
@@ -301,7 +299,7 @@ namespace Sources.Infrastructure.Services
         }
 
         private void CalculateVerticalWeight(
-            int[,] cells,
+            long[,] cells,
             int x,
             int startY,
             int endY)
@@ -320,7 +318,7 @@ namespace Sources.Infrastructure.Services
                 {
                     ICellType cellType = _table[x, i].CellType;
 
-                    int currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
+                    long currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
                         cells[x, i] = cellType.Weight;
@@ -330,7 +328,7 @@ namespace Sources.Infrastructure.Services
                 {
                     ICellType cellType = _table[x, i].CellType;
 
-                    int currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
+                    long currentWeight = (cells[x, i] & cellType.Mask) >> cellType.Offset;
 
                     if (currentWeight == 0)
                         cells[x, i] = cellType.Weight;

@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Match3.Domain;
 using Match3.Domain.Sources.Domain.Tables;
 using Sources.InfrastructureInterfaces.Services;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services
 {
@@ -63,8 +64,8 @@ namespace Sources.Infrastructure.Services
 
             _secondary = cell;
             _secondary.Select();
-            AdjacencyCheck();
             
+            AdjacencyCheck();
         }
 
         private async UniTask AdjacencyCheck()
