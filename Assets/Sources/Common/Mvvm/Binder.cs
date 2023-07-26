@@ -10,6 +10,7 @@ using Kruver.Mvvm.Properties;
 using Kruver.Mvvm.Properties.Attributes;
 using Kruver.Mvvm.ViewModels;
 using Kruver.Mvvm.Views;
+using UnityEngine;
 
 namespace Kruver.Mvvm
 {
@@ -27,12 +28,15 @@ namespace Kruver.Mvvm
             ApplyToFields(view, viewModel, BindField);
             ApplyToMethods(view, viewModel, BindMethod);
 
+            viewModel.Destroyed += view.Unbind;
+
             if (_notFoundTypes.Count > 0)
                 throw new NotFoundBindableViewException(view.GetType(), _notFoundTypes);
         }
 
         public void Unbind(BindableView view, IViewModel viewModel)
         {
+            viewModel.Destroyed -= view.Unbind;
             viewModel.Disable();
             
             _notFoundTypes.Clear();

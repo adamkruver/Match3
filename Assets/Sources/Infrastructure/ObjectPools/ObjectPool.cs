@@ -9,6 +9,16 @@ namespace Sources.Infrastructure.ObjectPools
     {
         private readonly List<T> _objects = new List<T>();
 
+        private Transform _parent;
+
+        public ObjectPool(string parentName = "")
+        {
+            if (string.IsNullOrEmpty(parentName))
+                return;
+
+            _parent = new GameObject(parentName).transform;
+        }
+
         public T Get(Type type)
         {
             if (_objects.Count == 0)
@@ -17,7 +27,12 @@ namespace Sources.Infrastructure.ObjectPools
             return _objects.FirstOrDefault(obj => obj.gameObject.activeSelf == false && obj.GetType() == type);
         }
 
-        public void Add(T @object) => 
+        public void Add(T @object)
+        {
+            Transform transform = @object.GetComponent<Transform>();
+            transform.parent = _parent;
+            
             _objects.Add(@object);
+        }
     }
 }

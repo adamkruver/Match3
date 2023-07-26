@@ -17,7 +17,7 @@ namespace Match3.Application.Builders
             // Infrastructure Factories
             CellFactory cellFactory = new CellFactory();
 
-            ObjectPool<BindableView> _viewsPool = new ObjectPool<BindableView>();
+            ObjectPool<BindableView> _viewsPool = new ObjectPool<BindableView>("CellPool");
 
             CellViewBuilder cellViewBuilder = new CellViewBuilder(viewTypeFactory, _viewsPool, viewFactory);
             

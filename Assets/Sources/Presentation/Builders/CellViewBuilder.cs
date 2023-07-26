@@ -28,8 +28,18 @@ namespace Match3.Presentation.Builders
         public IBindableView Build(ICellType cellType)
         {
             Type viewType = _viewTypeFactory.Create(cellType.GetType());
+
+            BindableView view = _objectPool.Get(viewType);
+
+            if (view != null)
+                return view;
+
+            view = (BindableView)_viewFactory.Create(viewType, @"Views/Cells/");
+            view.AfterUnbindCallback = () => _objectPool.Add(view);
             
-            return _objectPool.Get(viewType) ?? _viewFactory.Create(viewType, @"Views/Cells/");
+            _objectPool.Add(view);
+            
+            return _objectPool.Get(viewType);
         }
     }
 }

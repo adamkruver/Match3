@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Kruver.Mvvm.Methods;
@@ -12,6 +13,11 @@ namespace Kruver.Mvvm.ViewBindings.Transform
 
         private CancellationTokenSource _cancellationTokenSource;
 
+        private void OnDisable()
+        {
+            _cancellationTokenSource?.Cancel();
+        }
+
         public async UniTask SetScale(Vector3 targetScale)
         {
             _cancellationTokenSource?.Cancel();
@@ -19,7 +25,8 @@ namespace Kruver.Mvvm.ViewBindings.Transform
             
             await StartScaleCoroutine(targetScale);
             
-            BindingCallback?.Invoke(targetScale);
+            if(gameObject.activeSelf)
+                BindingCallback?.Invoke(targetScale);
         }
         
         private IEnumerator StartScaleCoroutine(Vector3 targetScale)

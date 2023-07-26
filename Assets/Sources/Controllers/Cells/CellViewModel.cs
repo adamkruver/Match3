@@ -9,6 +9,7 @@ using Kruver.Mvvm.ViewBindings.ParticleSystems;
 using Kruver.Mvvm.ViewBindings.Transform;
 using Kruver.Mvvm.ViewModels;
 using Match3.Domain;
+using Match3.Domain.Types;
 using Sources.InfrastructureInterfaces.Services;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Sources.Controllers.Cells
 
         [PropertyBinding(typeof(TransformSmoothScaleBindable))]
         private ObservableProperty<Vector3> _scale;
-
+        
         [PropertyBinding(typeof(GameObjectEnabledBindable), "Explosion")]
         private ObservableProperty<bool> _isExplose;
 
@@ -49,10 +50,18 @@ namespace Sources.Controllers.Cells
 
         protected override void OnEnable()
         {
+            Vector3 startPosition = new Vector3(Model.Position.x, Model.Position.y + 8, 0);
+            
+            if (Model.CellType is Multi)
+                startPosition = new Vector3(Model.Position.x, Model.Position.y, 0);
+            
             _isEnabled.Set(true);
-            _startPosition.Set(new Vector3(Model.Position.x, Model.Position.y + 8, 0));
+            _startPosition.Set(startPosition);
+            _isCellVisible.Set(true);
+            
             OnPositionChanging();
-
+            OnSelectionChanged();
+            
             AddListeners();
         }
 
@@ -72,10 +81,10 @@ namespace Sources.Controllers.Cells
 
         private void OnDestroying()
         {
-            Destroy();
+            DestroyAsync();
         }
 
-        private async UniTask Destroy()
+        private async UniTask DestroyAsync()
         {
             _isExplose.Set(true);
             await UniTask.WaitForSeconds(.6f);
@@ -105,7 +114,9 @@ namespace Sources.Controllers.Cells
         private async UniTask DisableAsync()
         {
             await UniTask.WaitForSeconds(.1f);
-            Disable();
+            _isCellVisible.Set(false);
+            _isExplose.Set(false);
+            Destroy();
         }
 
         [MethodBinding(typeof(ClickBindable))]
@@ -121,7 +132,6 @@ namespace Sources.Controllers.Cells
         [MethodBinding(typeof(ChangeTransformScaleBindable))]
         private void BindChangeScaleCallback(Vector3 scale)
         {
-//            _isCellVisible.Set(false);
         }
 
         [MethodBinding(typeof(ParticleSystemAfterPlayBindable))]

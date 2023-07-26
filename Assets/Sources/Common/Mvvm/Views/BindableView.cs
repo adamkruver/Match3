@@ -10,7 +10,7 @@ namespace Kruver.Mvvm.Views
         
         private IViewModel _viewModel;
         private bool _isEnabled;
-        
+
         public Action AfterUnbindCallback { get; set; }
 
         private void Awake()
@@ -36,7 +36,7 @@ namespace Kruver.Mvvm.Views
             _viewModel = viewModel;
             
             Binder.Bind(this, viewModel);
-            
+
             viewModel.Enable();
         }
 
