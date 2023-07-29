@@ -26,7 +26,7 @@ namespace Sources.Infrastructure.Services
         private List<Cell> _cellsToDestroy;
         private List<Cell> _newCells;
 
-        private readonly ICellType[] _celltypes = new ICellType[]
+        private readonly ICellType[] _cellTypes = new ICellType[]
         {
             new Banana(),
             new Apple(),
@@ -52,7 +52,7 @@ namespace Sources.Infrastructure.Services
 
         public List<Cell> Fill()
         {
-            List<Cell> newCells = new List<Cell>();
+            List<Cell> cells = new List<Cell>();
 
             for (int x = 0; x < _table.Width; x++)
             {
@@ -61,13 +61,13 @@ namespace Sources.Infrastructure.Services
                     if (_table[x, y] != null)
                         continue;
 
-                    ICellType cellType = _celltypes[_random.Next(_celltypes.Length)];
+                    ICellType cellType = _cellTypes[_random.Next(_cellTypes.Length)];
 
-                    newCells.Add(CreateCell(cellType, x, y));
+                    cells.Add(CreateCell(cellType, x, y));
                 }
             }
 
-            return newCells;
+            return cells;
         }
 
         private Cell CreateCell(ICellType cellType, int x, int y)
