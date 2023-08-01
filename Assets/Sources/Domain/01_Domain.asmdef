@@ -1,6 +1,6 @@
 {
     "name": "01_Domain",
-    "rootNamespace": "Match3.Damain",
+    "rootNamespace": "Match3.Domain",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
