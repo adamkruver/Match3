@@ -1,12 +1,13 @@
-﻿using Match3.Domain.Units;
+﻿using Match3.Domain.Assets.Sources.Domain.Players;
+using Match3.Domain.Units;
 
 namespace Match3.Controllers.Assets.Sources.Controllers.Units.Factories
 {
     public class UnitViewModelFactory
     {
-        public UnitViewModel Create(IUnit unit)
+        public UnitViewModel Create(IUnit unit, Player player)
         {
-            return new UnitViewModel(unit);
+            return new UnitViewModel(unit, player);
         }
     }
 }

@@ -53,12 +53,14 @@ namespace Match3.Application.Assets.Sources.Application.Games.Builders
         {
             List<IUnit> units = new List<IUnit>();
 
+            Player player = _playerFactory.Create(units);
+
             foreach (var unitType in unitTypes)
             {
                 IUnit unit = _unitDirector.Build(unitType);
                 units.Add(unit);
 
-                UnitViewModel unitViewModel = _unitViewModelFactory.Create(unit);
+                UnitViewModel unitViewModel = _unitViewModelFactory.Create(unit, player);
                 UnitView unitView = _unitViewFactory.Create(unitType);
                 HitPointsViewModel hitPointsViewModel = _hitPointsViewModelFactory.Create(unit);
                 HitPointsBarView hitPointsBarView = _hitPointsBarViewFactory.Create();
@@ -68,7 +70,6 @@ namespace Match3.Application.Assets.Sources.Application.Games.Builders
                 playerView.AddChild(unitView, hitPointsBarView);
             }
 
-            Player player = _playerFactory.Create(units);
             PlayerViewModel playerViewModel = _playerViewModelFactory.Create(player);
         }
     }

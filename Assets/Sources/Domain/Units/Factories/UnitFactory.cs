@@ -1,4 +1,5 @@
-﻿using Match3.Domain.Assets.Sources.Domain.Units.Types;
+﻿using Match3.Domain.Assets.Sources.Domain.Units.Components;
+using Match3.Domain.Assets.Sources.Domain.Units.Types;
 using Match3.Domain.Attack.Strategies;
 using Match3.Domain.Units.Components;
 
@@ -21,6 +22,7 @@ namespace Match3.Domain.Units.Factories
             unit.AddComponent(takeAttack);
             unit.AddComponent(takeAttackLoop);
             unit.AddComponent(new TakeAttackRouterComponent(takeAttackLoop, takeAttack));
+            unit.AddComponent(new SelectableComponent());
 
             return unit;
         }
