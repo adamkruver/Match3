@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Match3.Domain.Assets.Sources.Domain.Components;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Match3.Domain.Components
 {
-    public class Composite
+    public class Composite : IComposite
     {
         private readonly List<IComponent> _components = new();
 

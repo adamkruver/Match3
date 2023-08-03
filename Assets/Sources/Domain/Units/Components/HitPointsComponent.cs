@@ -16,6 +16,7 @@ namespace Match3.Domain.Units.Components
 
         public int Max { get; }
         public int Current { get; private set; }
+        public float Normalized => (float)Current / Max;
 
         public void TakeHit(int points)
         {

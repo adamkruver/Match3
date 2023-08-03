@@ -21,7 +21,22 @@ namespace Match3.Application
         public void Run()
         {
             _tableFactory.Create(8, 8);
-            _playerBuilder.BuildLeft(new IUnitType[] { new Ogre(), new Ogre(), new Beholder() });
+            _playerBuilder.BuildLeft(new IUnitType[]
+            {
+                new Ogre(),
+                new Ogre(),
+                new Ogre(),
+                new Ogre(),
+                new Beholder(),
+                new Beholder(),
+                new Ogre(),
+            });
+
+            _playerBuilder.BuildRight(new IUnitType[]
+            {
+                new Ogre(),
+                new Beholder(),
+            });
         }
 
         public void Update()
