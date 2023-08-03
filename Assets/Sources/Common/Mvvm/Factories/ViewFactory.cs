@@ -14,6 +14,12 @@ namespace Kruver.Mvvm.Factories
         private readonly PrefabViewFactory _prefabViewFactory = new PrefabViewFactory();
         private readonly Binder _binder = new Binder();
 
+        public TView Create<TView>(string viewPath = "", string prefix = "")
+            where TView : IBindableView
+        {
+            return (TView)Create(typeof(TView), viewPath + prefix);
+        }
+
         public TView Create<TView>(string viewPath = "")
             where TView : IBindableView
         {

@@ -5,7 +5,7 @@ using Kruver.Mvvm.Views;
 using Match3.Domain;
 using Match3.Domain.Sources.Domain.Tables;
 using Match3.Domain.Types;
-using Match3.PresentationInterfaces.Sources.PresentationInterfaces.Builders;
+using Match3.PresentationInterfaces.Builders;
 using Sources.Controllers.Cells;
 using Sources.Infrastructure.Services.Strategies;
 using Sources.InfrastructureInterfaces.Factories;

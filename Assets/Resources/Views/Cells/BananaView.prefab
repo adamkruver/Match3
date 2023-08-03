@@ -176,12 +176,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7108626564391763083}
   - component: {fileID: 7108626564391763092}
-  - component: {fileID: 4768310913926104388}
   - component: {fileID: 2939246596157026337}
   - component: {fileID: 6877511291547449087}
   - component: {fileID: -5017232107309480216}
   - component: {fileID: 8826091027483668600}
   - component: {fileID: 5749041966958630671}
+  - component: {fileID: 9074132152275832722}
   m_Layer: 0
   m_Name: BananaView
   m_TagString: Untagged
@@ -221,18 +221,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4768310913926104388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7108626564391763095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e58bf9aec514e3ab91f0d4a88e499cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2939246596157026337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b05792b0a074a06a7f7954f3c81d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 4768310913926104388}
+  _view: {fileID: 9074132152275832722}
 --- !u!114 &6877511291547449087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +282,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9074132152275832722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108626564391763095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fd0d3619dc0ab40b565786534d9e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9076978219581132214

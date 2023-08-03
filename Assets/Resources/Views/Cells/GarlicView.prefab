@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4719787226928497661}
   - component: {fileID: 4719787226928497634}
-  - component: {fileID: 4931530163288816133}
   - component: {fileID: 7116757796568441160}
   - component: {fileID: 1634795052419132614}
   - component: {fileID: 1379999785986589526}
   - component: {fileID: 9017979878094321991}
   - component: {fileID: 2239111186805782931}
+  - component: {fileID: 641899520426633535}
   m_Layer: 0
   m_Name: GarlicView
   m_TagString: Untagged
@@ -55,18 +55,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4931530163288816133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4719787226928497633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34783446d88b44108185ebe9d9e3726a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7116757796568441160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b05792b0a074a06a7f7954f3c81d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 4931530163288816133}
+  _view: {fileID: 641899520426633535}
 --- !u!114 &1634795052419132614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +116,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &641899520426633535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719787226928497633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a7e2f7615eed640b60489f73268744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4765841997536014876

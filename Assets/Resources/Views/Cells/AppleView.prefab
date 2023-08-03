@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7116757796568441160}
   - component: {fileID: 1634795052419132614}
   - component: {fileID: 1379999785986589526}
-  - component: {fileID: 6505161383065346016}
   - component: {fileID: 9017979878094321991}
   - component: {fileID: 2239111186805782931}
+  - component: {fileID: 5909406404544354077}
   m_Layer: 0
   m_Name: AppleView
   m_TagString: Untagged
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b05792b0a074a06a7f7954f3c81d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 6505161383065346016}
+  _view: {fileID: 5909406404544354077}
 --- !u!114 &1634795052419132614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,18 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d58c752467472da11c5b521a97d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6505161383065346016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4719787226928497633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336119a33a8946e4b5f774fa147416f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9017979878094321991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +116,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5909406404544354077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719787226928497633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87755b15b467ff4690ae8a956a92190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4765841997536014876

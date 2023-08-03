@@ -1,29 +1,27 @@
-using System;
-using Kruver.Mvvm.Factories;
-using Kruver.Mvvm.Views;
-using Match3.Domain;
-using Match3.Domain.Sources.Domain.Tables;
-using Match3.Presentation.Sources.Presentation.Factories;
-using Sources.Controllers.Cells;
+using Match3.Application.Assets.Sources.Application.Games.Builders;
+using Match3.Domain.Assets.Sources.Domain.Units.Types;
 using Sources.Infrastructure.Factories;
-using Sources.Infrastructure.Services;
 
 namespace Match3.Application
 {
     public class Game
     {
         private readonly TableFactory _tableFactory;
+        private readonly PlayerBuilder _playerBuilder;
 
         public Game(
-            TableFactory tableFactory
+            TableFactory tableFactory,
+            PlayerBuilder playerBuilder
         )
         {
             _tableFactory = tableFactory;
+            _playerBuilder = playerBuilder;
         }
 
         public void Run()
         {
             _tableFactory.Create(8, 8);
+            _playerBuilder.BuildLeft(new IUnitType[] { new Ogre(), new Ogre(), new Beholder() });
         }
 
         public void Update()

@@ -1,5 +1,8 @@
 ﻿using Kruver.Mvvm.Factories;
 using Kruver.Mvvm.Views;
+using Match3.Application.Assets.Sources.Application.Games.Builders;
+using Match3.Domain.Units.Builders;
+using Match3.Presentation.Assets.Sources.Presentation.Factories;
 using Match3.Presentation.Builders;
 using Match3.Presentation.Sources.Presentation.Factories;
 using Sources.Infrastructure.Factories;
@@ -24,9 +27,12 @@ namespace Match3.Application.Builders
             // Infrastructure Factories
             TableFactory tableFactory = new TableFactory(cellFactory, cellViewBuilder);
 
+            UnitViewFactory unitViewFactory = new UnitViewFactory(viewFactory);
+            UnitDirector unitDirector = new UnitDirector();
 
+            PlayerBuilder playerBuilder = new PlayerBuilder(unitViewFactory, unitDirector);
 
-            return new Game(tableFactory);
+            return new Game(tableFactory, playerBuilder);
         }
     }
 }

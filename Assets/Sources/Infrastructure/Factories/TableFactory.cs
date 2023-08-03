@@ -1,5 +1,5 @@
 ﻿using Match3.Domain.Sources.Domain.Tables;
-using Match3.PresentationInterfaces.Sources.PresentationInterfaces.Builders;
+using Match3.PresentationInterfaces.Builders;
 using Sources.Infrastructure.Services;
 using Sources.InfrastructureInterfaces.Factories;
 

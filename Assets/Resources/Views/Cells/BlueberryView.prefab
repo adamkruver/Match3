@@ -316,12 +316,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5147545059525235522}
   - component: {fileID: 5147545059525235549}
-  - component: {fileID: 461408913117770403}
   - component: {fileID: 6282891405703070721}
   - component: {fileID: 7828467113211610268}
   - component: {fileID: -4678473441713855530}
   - component: {fileID: 6482389276279912549}
   - component: {fileID: -5656032657933131416}
+  - component: {fileID: 2943010657973089730}
   m_Layer: 0
   m_Name: BlueberryView
   m_TagString: Untagged
@@ -361,18 +361,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &461408913117770403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5147545059525235550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee0ec1d5fbd4ebea557783ff6e0c949, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6282891405703070721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b05792b0a074a06a7f7954f3c81d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 461408913117770403}
+  _view: {fileID: 2943010657973089730}
 --- !u!114 &6482389276279912549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +422,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c380fca13f2444e9cdba733b9d80061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2943010657973089730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147545059525235550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9983b84ff3a3544419f16e14743927af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2947802709989907114

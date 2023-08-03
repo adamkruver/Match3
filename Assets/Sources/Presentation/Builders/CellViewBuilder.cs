@@ -2,8 +2,8 @@
 using Kruver.Mvvm.Factories;
 using Kruver.Mvvm.Views;
 using Match3.Domain;
+using Match3.PresentationInterfaces.Builders;
 using Match3.PresentationInterfaces.Factories;
-using Match3.PresentationInterfaces.Sources.PresentationInterfaces.Builders;
 using Sources.Infrastructure.ObjectPools;
 
 namespace Match3.Presentation.Builders
