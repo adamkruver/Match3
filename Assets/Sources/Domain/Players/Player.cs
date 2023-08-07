@@ -1,5 +1,6 @@
 ﻿using Match3.Domain.Assets.Sources.Domain.Units.Components;
 using Match3.Domain.Units;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,10 +10,14 @@ namespace Match3.Domain.Assets.Sources.Domain.Players
     {
         public Player(IEnumerable<IUnit> units)
         {
-            Units = units.ToArray();
+            Units = units;
         }
 
+        public event Action SelectChanged;
+
         public IEnumerable<IUnit> Units { get; }
+        public IUnit Selected { get; private set; }
+        public IUnit[] Unselecteds => Units.Where(unit => unit != Selected).ToArray();
 
         public void Select(IUnit selectedUnit)
         {
@@ -24,10 +29,17 @@ namespace Match3.Domain.Assets.Sources.Domain.Players
                 SelectableComponent selectable = unit.Get<SelectableComponent>();
 
                 if (selectedUnit == unit)
+                {
                     selectable.Select();
+                    Selected = unit;
+                }
                 else
+                { 
                     selectable.Unselect();
+                }
             }
+
+            SelectChanged?.Invoke();
         }
     }
 }

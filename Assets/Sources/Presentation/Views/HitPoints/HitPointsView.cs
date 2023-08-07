@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Kruver.Mvvm.Views;
 
 namespace Match3.Presentation.Assets.Sources.Presentation.Views.HitPoints
 {
-    public class HitPointsView : MonoBehaviour
+    public class HitPointsView : BindableView
     {
         public void Add(HitPointsBarView hitPointsBarView)
         {

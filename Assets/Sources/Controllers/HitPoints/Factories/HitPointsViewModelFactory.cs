@@ -1,13 +1,12 @@
-﻿using Kruver.Mvvm.ViewModels;
-using Match3.Domain.Units;
+﻿using Match3.Domain.Assets.Sources.Domain.Players;
 
 namespace Match3.Controllers.Assets.Sources.Controllers.HitPoints.Factories
 {
     public class HitPointsViewModelFactory
     {
-        public HitPointsViewModel Create(IUnit unit)
+        public HitPointsViewModel Create(Player player)
         {
-            return new HitPointsViewModel(unit);
+            return new HitPointsViewModel(player);
         }
     }
 }

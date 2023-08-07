@@ -23,6 +23,7 @@ namespace Match3.Domain.Units.Factories
             unit.AddComponent(takeAttackLoop);
             unit.AddComponent(new TakeAttackRouterComponent(takeAttackLoop, takeAttack));
             unit.AddComponent(new SelectableComponent());
+            unit.AddComponent(new BarPositionComponent());
 
             return unit;
         }

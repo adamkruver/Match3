@@ -10,7 +10,6 @@ using Match3.Domain.Assets.Sources.Domain.Players;
 using Match3.Domain.Assets.Sources.Domain.Units.Types;
 using Match3.Domain.Units;
 using Match3.Domain.Units.Builders;
-using Match3.Domain.Units.Factories;
 using Match3.Presentation.Assets.Sources.Presentation.Factories;
 using Match3.Presentation.Assets.Sources.Presentation.Views.GamePlayHud;
 using Match3.Presentation.Assets.Sources.Presentation.Views.HitPoints;
@@ -27,6 +26,7 @@ namespace Match3.Application.Assets.Sources.Application.Games.Builders
         private readonly UnitViewModelFactory _unitViewModelFactory = new UnitViewModelFactory();
         private readonly UnitViewFactory _unitViewFactory;
         private readonly HitPointsBarViewFactory _hitPointsBarViewFactory;
+        private readonly HitPointsBarViewModelFactory _hitPointsBarViewModelFactory = new HitPointsBarViewModelFactory();
         private readonly HitPointsViewModelFactory _hitPointsViewModelFactory = new HitPointsViewModelFactory();
         private readonly UnitDirector _unitDirector;
         private readonly GameplayHudView _gameplayHudView;
@@ -54,6 +54,9 @@ namespace Match3.Application.Assets.Sources.Application.Games.Builders
             List<IUnit> units = new List<IUnit>();
 
             Player player = _playerFactory.Create(units);
+            PlayerViewModel playerViewModel = _playerViewModelFactory.Create(player);
+            HitPointsViewModel hitPointsViewModel = _hitPointsViewModelFactory.Create(player);
+            playerView.HitPointsView.Bind(hitPointsViewModel);
 
             foreach (var unitType in unitTypes)
             {
@@ -62,15 +65,13 @@ namespace Match3.Application.Assets.Sources.Application.Games.Builders
 
                 UnitViewModel unitViewModel = _unitViewModelFactory.Create(unit, player);
                 UnitView unitView = _unitViewFactory.Create(unitType);
-                HitPointsViewModel hitPointsViewModel = _hitPointsViewModelFactory.Create(unit);
+                HitPointsBarViewModel hitPointsBarViewModel = _hitPointsBarViewModelFactory.Create(unit);
                 HitPointsBarView hitPointsBarView = _hitPointsBarViewFactory.Create();
 
                 unitView.Bind(unitViewModel);
-                hitPointsBarView.Bind(hitPointsViewModel);
+                hitPointsBarView.Bind(hitPointsBarViewModel);
                 playerView.AddChild(unitView, hitPointsBarView);
             }
-
-            PlayerViewModel playerViewModel = _playerViewModelFactory.Create(player);
         }
     }
 }

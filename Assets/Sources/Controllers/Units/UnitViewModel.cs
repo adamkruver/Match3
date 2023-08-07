@@ -5,6 +5,7 @@ using Kruver.Mvvm.ViewBindings.Buttons;
 using Kruver.Mvvm.ViewBindings.GameObject;
 using Kruver.Mvvm.ViewBindings.GameObjects;
 using Kruver.Mvvm.ViewModels;
+using Match3.Common.Assets.Sources.Common.Mvvm.ViewBindings.Selectable;
 using Match3.Domain.Assets.Sources.Domain.Players;
 using Match3.Domain.Assets.Sources.Domain.Units.Components;
 using Match3.Domain.Units;

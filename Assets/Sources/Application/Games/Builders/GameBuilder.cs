@@ -32,7 +32,6 @@ namespace Match3.Application.Builders
 
             GameplayHudView gameplayHudView = new GameplayHudViewFactory().Create();
 
-
             PlayerBuilder playerBuilder = new PlayerBuilder(viewFactory, unitDirector, gameplayHudView);
 
             return new Game(tableFactory, playerBuilder);
