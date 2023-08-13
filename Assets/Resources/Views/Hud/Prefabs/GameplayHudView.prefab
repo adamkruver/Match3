@@ -2753,7 +2753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759026731886529964, guid: 84ae8be1e22b80f48924f3439e067b18, type: 3}
       propertyPath: m_Name
-      value: HitPointsView
+      value: HitPointsViewRight
       objectReference: {fileID: 0}
     - target: {fileID: 7005013152154569177, guid: 84ae8be1e22b80f48924f3439e067b18, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3034,7 +3034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759026731886529964, guid: 84ae8be1e22b80f48924f3439e067b18, type: 3}
       propertyPath: m_Name
-      value: HPBarsLeft
+      value: HitPointsViewLeft
       objectReference: {fileID: 0}
     - target: {fileID: 7005013152154569177, guid: 84ae8be1e22b80f48924f3439e067b18, type: 3}
       propertyPath: m_AnchorMax.y

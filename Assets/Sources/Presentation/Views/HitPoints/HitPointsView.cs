@@ -8,5 +8,10 @@ namespace Match3.Presentation.Assets.Sources.Presentation.Views.HitPoints
         {
             hitPointsBarView.transform.SetParent(transform, false);
         }
+
+        private void Awake()
+        {
+            Construct(new Kruver.Mvvm.Binder());
+        }
     }
 }
